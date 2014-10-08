@@ -46,7 +46,7 @@
 Defines chip type,cortex-m3(1),cortex-m0(2)      
 cortex-m4 without FPU(1), cortex-m4 with FPU(3)
 */
-#define CFG_CHIP_TYPE           (3)
+#define CFG_CHIP_TYPE           (1)
 
 /*!< 
 Defines the lowest priority that be assigned.       
@@ -56,7 +56,7 @@ Defines the lowest priority that be assigned.
 /*!< 
 Max number of tasks that can be running.		     
 */			
-#define CFG_MAX_USER_TASKS      (5)
+#define CFG_MAX_USER_TASKS      (32)
 
 /*!< 
 Idle task stack size(word).		                         
