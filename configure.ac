@@ -1,5 +1,11 @@
 dnl Process this file with autoconf to produce a configure script.
 
+flavor=
+if test ! -z "${ac_cv_host}" 
+	flavor="${ac_cv_host}-"
+	CC="${flavor}-gcc"
+fi
+
 AC_PREREQ(2.67)
 AC_COPYRIGHT([(c) 2014 Chris Luke])
 
@@ -21,13 +27,16 @@ AC_PROG_CXX
 AC_PROG_CC_C99
 AM_PROG_CC_C_O
 LT_INIT
+AC_DISABLE_FAST_INSTALL
 AC_DISABLE_SHARED
 AC_ENABLE_STATIC
 AC_PROG_LIBTOOL
 AC_SUBST([LIBTOOL_DEPS])
 
+AC_CHECK_TOOL([OBJCOPY], [${flavor}objcopy], [])
+AC_CHECK_TOOL([OBJDUMP], [${flavor}objdump], [])
+
 # Compiler flags
-#AX_CFLAGS_GCC_OPTION([-std=c99])
 AX_CFLAGS_GCC_OPTION([-pipe])
 AX_CFLAGS_GCC_OPTION([-mcpu=cortex-m3 -mthumb])
 
@@ -38,7 +47,6 @@ AX_CFLAGS_GCC_OPTION([-Wextra])
 
 # These are warnings included in -Wextra, but we don't want all of -Wextra
 AX_CFLAGS_GCC_OPTION([-Wno-unused-parameter])
-#AX_CFLAGS_GCC_OPTION([-Wno-sign-compare])
 
 # And finally, be picky
 AX_CFLAGS_GCC_OPTION([-Werror])
@@ -84,7 +92,7 @@ bdir="${srcdir}"
 if test x"${bdir}" = x'.' ; then
 	bdir=$(pwd)
 fi
-CPPFLAGS="$CPPFLAGS -I${bdir}/include -I${bdir}/CoOS/kernel -I${bdir}/CoOS/portable"
+CPPFLAGS="$CPPFLAGS -I${bdir}/include -I${bdir}/CoOS -I${bdir}/CoOS/kernel -I${bdir}/CoOS/portable"
 
 # Display the summary
 CC=`echo $CC | sed -e 's/  / /g'`
@@ -106,7 +114,8 @@ echo "srcdir:   $srcdir" >&2
 AC_CONFIG_FILES([Makefile
 	include/Makefile
 	include/cc_config.h
-	CoOS/Makefile])
+	CoOS/Makefile
+	src/Makefile])
 AC_CONFIG_HEADER([include/ac_config.h])
 AC_OUTPUT
 

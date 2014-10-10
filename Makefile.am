@@ -3,7 +3,7 @@
 ACLOCAL_AMFLAGS = -I aclocal
 
 coos = CoOS
-sources = include
+sources = include src
 SUBDIRS = $(coos) $(sources)
 
 EXTRA_DIST = bootstrap do-configure-arm

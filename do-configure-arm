@@ -1,2 +1,2 @@
 #!/bin/sh
-./configure --host=arm-none-eabi CC="arm-none-eabi-gcc" $*
+./configure --host=arm-none-eabi

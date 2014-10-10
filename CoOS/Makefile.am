@@ -3,6 +3,7 @@
 lib_LTLIBRARIES = libcoos.la
 
 sources = \
+	portable/arch.c \
 	portable/GCC/port.c \
 	kernel/core.c \
 	kernel/event.c \

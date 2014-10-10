@@ -25,3 +25,8 @@ include/stamp-h1
 .deps
 .libs
 .dirstamp
+src/image
+src/image.elf
+src/image.lst
+src/image.bin
+src/image.hex
